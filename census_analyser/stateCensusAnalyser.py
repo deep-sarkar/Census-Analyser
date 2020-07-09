@@ -18,15 +18,19 @@ class CSVStateCensus(StateCensusAnalyser):
         self.col_list = repr(StateCensusAnalyser()).split(",")
         self.df = pd.read_csv(self.file_name, usecols=self.col_list)
 
-    def iterate_df(self, df):
+    def iterate_df(self, dataframe):
         for row in df.itertuples():
             print(row)
         
-
+    def number_of_records(self, dataframe):
+        return len(dataframe) - 1
 
 file_name = "IndiaStateCensusData.csv"
 obj = CSVStateCensus(file_name)
 df = obj.df
+# total_records = obj.number_of_records(df)
+# print(total_records)
+# print(len(df))
 # obj.iterate_df(df)
 # df_goa = df.loc[df["State"]=="Goa"]
 # print(df_goa)
