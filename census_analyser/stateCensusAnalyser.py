@@ -1,4 +1,7 @@
 import pandas as pd
+from . custom_exceptions import FileIsNotCSVTypeException, EmptyFileException
+from abc import ABC, abstractmethod
+
 class StateCensusAnalyser:
 
     def __init__(self):
@@ -10,13 +13,20 @@ class StateCensusAnalyser:
     def __repr__(self):
         return self.state +','+ self.population +','+ self.areaInSqKm +','+ self.densityPerSqKm
 
+class ValidateFile(ABC):
+    
+    @abstractmethod
+    def check_file_format(self, file_name):
+        pass
 
-class CSVStateCensus(StateCensusAnalyser):
+            
+class CSVStateCensus(StateCensusAnalyser, ValidateFile):
 
     def __init__(self, file_name):
         self.file_name = file_name
         self.col_list = repr(StateCensusAnalyser()).split(",")
         self.df = pd.read_csv(self.file_name, usecols=self.col_list)
+
 
     def iterate_df(self, dataframe):
         for row in df.itertuples():
@@ -24,6 +34,8 @@ class CSVStateCensus(StateCensusAnalyser):
         
     def number_of_records(self, dataframe):
         return len(dataframe) - 1
+
+
 
 file_name = "IndiaStateCensusData.csv"
 obj = CSVStateCensus(file_name)
