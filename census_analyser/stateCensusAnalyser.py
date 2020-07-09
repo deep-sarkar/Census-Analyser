@@ -30,11 +30,12 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     def load_CSV(self):
         if self.check_file_format(self.file_name):
             raise FileIsNotCSVTypeException
+        try:
             df = pd.read_csv(self.file_name, usecols=self.col_list)
             return df
+        except pd.errors.EmptyDataError:
+            raise EmptyFileException
         
-        
-
     def iterate_df(self, dataframe):
         for row in dataframe.itertuples():
             print(row)
