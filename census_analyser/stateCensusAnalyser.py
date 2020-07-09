@@ -1,5 +1,5 @@
 import pandas as pd
-from . custom_exceptions import FileIsNotCSVTypeException, EmptyFileException
+from custom_exceptions import FileIsNotCSVTypeException
 from abc import ABC, abstractmethod
 
 class StateCensusAnalyser:
