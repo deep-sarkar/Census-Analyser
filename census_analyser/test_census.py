@@ -1,6 +1,6 @@
 import pytest
-from . stateCensusAnalyser import CSVStateCensus
-from . custom_exceptions import FileIsNotCSVTypeException
+from stateCensusAnalyser import CSVStateCensus
+from custom_exceptions import FileIsNotCSVTypeException
 
 class TestCensus:
 
