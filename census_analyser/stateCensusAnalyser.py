@@ -25,6 +25,8 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     def __init__(self, file_name):
         self.file_name = file_name
         self.col_list = repr(StateCensusAnalyser()).split(",")
+        if self.check_file_format(file_name):
+            raise FileIsNotCSVTypeException
         self.df = pd.read_csv(self.file_name, usecols=self.col_list)
 
 
@@ -35,6 +37,8 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     def number_of_records(self, dataframe):
         return len(dataframe) - 1
 
+    def check_file_format(self, file_name):
+        return file_name[-4:] != '.csv'
 
 
 file_name = "IndiaStateCensusData.csv"
