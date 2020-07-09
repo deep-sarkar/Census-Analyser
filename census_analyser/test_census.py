@@ -1,5 +1,6 @@
 import pytest
 from . stateCensusAnalyser import CSVStateCensus
+from . custom_exceptions import FileIsNotCSVTypeException
 
 class TestCensus:
 
@@ -7,3 +8,7 @@ class TestCensus:
         obj = CSVStateCensus("IndiaStateCensusData.csv")
         total_records = obj.number_of_records(obj.df)
         assert total_records == 28
+
+    def test_file_not_in_csv_format_will_raise_FileIsNotCSVTypeException_UC1_TC2(self):
+        with pytest.raises(FileIsNotCSVTypeException):
+            CSVStateCensus("abc.txt")
