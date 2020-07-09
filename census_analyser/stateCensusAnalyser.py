@@ -13,17 +13,19 @@ class StateCensusAnalyser:
 
 class CSVStateCensus(StateCensusAnalyser):
 
-    def __init__(self):
-        self.file_name = "IndiaStateCensusData.csv"
+    def __init__(self, file_name):
+        self.file_name = file_name
         self.col_list = repr(StateCensusAnalyser()).split(",")
         self.df = pd.read_csv(self.file_name, usecols=self.col_list)
 
-# obj = CSVStateCensus()
-# df = obj.df
-# df_goa = df.loc[df["State"]=="Goa"]
-# print(df_goa['Population'])
-# print(obj.df.iloc["Goa"])
-# if obj.df["State"] == "Goa":
-#     print(obj.df['Population'])
+
+file_name = "IndiaStateCensusData.csv"
+obj = CSVStateCensus(file_name)
+df = obj.df
+df_goa = df.loc[df["State"]=="Goa"]
+print(df_goa)
+print(df_goa['Population'])
+
+
 
 
