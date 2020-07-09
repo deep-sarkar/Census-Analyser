@@ -47,10 +47,10 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
         return file_name[-4:] != '.csv'
 
 
-# file_name = "IndiaStateCensusData.csv"
-# obj = CSVStateCensus(file_name)
-# df = obj.load_CSV
-# print(df)
+file_name = "IndiaStateCensusData.csv"
+obj = CSVStateCensus(file_name)
+df = obj.load_CSV
+print(df)
 # total_records = obj.number_of_records(df)
 # print(total_records)
 # print(len(df))
