@@ -5,6 +5,9 @@ from custom_exceptions import (FileIsNotCSVTypeException,
 from abc import ABC, abstractmethod
 # import numpy as np
 
+'''
+StatusCensusAnalyser class will load StateCensus data
+'''
 class StateCensusAnalyser:
 
     def __init__(self):
@@ -16,17 +19,22 @@ class StateCensusAnalyser:
     def __repr__(self):
         return self.state +','+ self.population +','+ self.areaInSqKm +','+ self.densityPerSqKm
 
+
+'''
+ValidateFile(ABC) is a abstract base class which have all abstract methods and these methods are used 
+to validate csv file.
+'''
 class ValidateFile(ABC):
     
     @abstractmethod
-    def check_file_format(self, file_name):
+    def check_file_format(self, file_name):  #abstract method to check file format is .csv or not
         pass
     
     @abstractmethod
-    def check_delimiter(self, data_frame):
+    def check_delimiter(self, data_frame): #abstract method to check delimiter is correct or not
         pass
             
-class CSVStateCensus(StateCensusAnalyser, ValidateFile):
+class CSVStateCensus(StateCensusAnalyser, ValidateFile): 
 
     def __init__(self, file_name):
         self.file_name = file_name
@@ -46,17 +54,17 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
         except ValueError:
             return "InvalidHeader"
 
-    def iterate_df(self, dataframe):
+    def iterate_df(self, dataframe):        #Iterate dataframe into touples
         for row in dataframe.itertuples():
             print(row)
         
-    def number_of_records(self, dataframe):
+    def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
 
-    def check_file_format(self, file_name):
+    def check_file_format(self, file_name): #overrided method to check file format will returns True if its not .csv
         return file_name[-4:] != '.csv'
 
-    def check_delimiter(self, data_frame):
+    def check_delimiter(self, data_frame): #if there is nan in file or empty data will return True
         return data_frame.isnull().values.any()
     
 
