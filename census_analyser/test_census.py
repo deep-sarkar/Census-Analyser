@@ -25,3 +25,7 @@ class TestCensus:
         with pytest.raises(InvalidDelimiterException):
             obj = CSVStateCensus('csv_with_invalid_delimiter.csv')
             obj.load_CSV
+    
+    def test_file_is_csv_but_header_is_invalid_will_return_InvalidHeader_UC1_TC5(self):
+        obj = CSVStateCensus("csv_with_invalid_header.csv")
+        assert obj.load_CSV == "InvalidHeader"
