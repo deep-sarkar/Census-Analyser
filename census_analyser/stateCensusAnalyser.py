@@ -1,5 +1,5 @@
 import pandas as pd
-from custom_exceptions import FileIsNotCSVTypeException, EmptyFileException
+from custom_exceptions import FileIsNotCSVTypeException, EmptyFileException, InvalidDelimiterException
 from abc import ABC, abstractmethod
 # import numpy as np
 
@@ -36,6 +36,8 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
             raise FileIsNotCSVTypeException
         try:
             df = pd.read_csv(self.file_name, usecols=self.col_list)
+            if self.check_delimiter(df):
+                raise InvalidDelimiterException
             return df
         except pd.errors.EmptyDataError:
             raise EmptyFileException
@@ -56,6 +58,7 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
 
 file_name = "IndiaStateCensusData.csv"
 invalid_header_file = "csv_with_invalid_header.csv"
+invalid_delimiter_file = "csv_with_invalid_delimiter.csv"
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
 
