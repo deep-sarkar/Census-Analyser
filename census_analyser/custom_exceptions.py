@@ -4,8 +4,9 @@ class BaseException(Exception):
 class FileIsNotCSVTypeException(BaseException):
     pass
 
-class FileNotFoundException(BaseException):
+class InvalidDelimiterException(BaseException):
     pass
 
 class EmptyFileException(BaseException):
     pass
+
