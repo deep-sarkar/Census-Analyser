@@ -26,25 +26,30 @@ class CSVState:
 
     def __init__(self):
         self.srNo      = 'SrNo'
-        self.state     = 'State'
-        self.name      = 'Name'
+        self.stateName     = 'StateName'
         self.tin       = 'TIN'
         self.stateCode = 'StateCode'
 
     def __repr__(self):
-        return self.srNo +','+ self.state +','+ self.name +','+ self.tin +','+ self.stateCode
-        
+        return self.srNo +','+ self.stateName +','+ self.tin +','+ self.stateCode
 
 '''
 ValidateFile(ABC) is a abstract base class which have all abstract methods and these methods are used 
 to validate csv file.
 '''           
-class CSVStateCensus(StateCensusAnalyser): 
+class CSVStateCensus(StateCensusAnalyser, CSVState): 
 
     def __init__(self, file_name):
         self.file_name = file_name
-        self.col_list = repr(StateCensusAnalyser()).split(",")
-    
+        
+    @property
+    def col_list(self):
+        if self.file_name == 'StateCode.csv':
+            col_list = repr(CSVState()).split(",")
+        else:
+            col_list = repr(StateCensusAnalyser()).split(",")
+        return col_list
+
     @property
     def load_CSV(self):
         if self.file_name[-4:] != '.csv':
@@ -68,25 +73,17 @@ class CSVStateCensus(StateCensusAnalyser):
 
 
 
-
-
-
-
-
-    # def check_file_format(self, file_name): #overrided method to check file format will returns True if its not .csv
-    #     return file_name[-4:] != '.csv'
-
-    # def check_delimiter(self, data_frame): #if there is nan in file or empty data will return True
-    #     return data_frame.isnull().values.any()
     
 
-# file_name = "IndiaStateCensusData.csv"
+file_name = "IndiaStateCensusData.csv"
 # invalid_header_file = "csv_with_invalid_header.csv"
 # invalid_delimiter_file = "csv_with_invalid_delimiter.csv"
 # demo_empty_csv = "demo_empty.csv"
 # demo_txt    = "demo_empty.txt"
-# obj = CSVStateCensus(invalid_header_file)
-# df = obj.load_CSV
+code_csv = 'StateCode.csv'
+obj = CSVStateCensus(file_name)
+df = obj.load_CSV
+print(df)
 
 # if df.isnull().values.any():
 #     print("yes")
