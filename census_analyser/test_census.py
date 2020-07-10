@@ -13,12 +13,12 @@ class TestCensus:
 
     def test_file_not_in_csv_format_will_raise_FileIsNotCSVTypeException_UC1_TC2(self):
         with pytest.raises(FileIsNotCSVTypeException):
-            obj = CSVStateCensus("demo.txt")
+            obj = CSVStateCensus("demo_empty.txt")
             obj.load_CSV
     
     def test_file_is_csv_but_empty_will_raise_EmptyFileException_UC1_TC3(self):
         with pytest.raises(EmptyFileException):
-            obj = CSVStateCensus("demo.csv")
+            obj = CSVStateCensus("demo_empty.csv")
             obj.load_CSV
 
     def test_file_is_csv_but_delimiter_is_invalid_will_raise_InvalidDelimiterException_UC1_TC4(self):
