@@ -19,6 +19,21 @@ class StateCensusAnalyser:
     def __repr__(self):
         return self.state +','+ self.population +','+ self.areaInSqKm +','+ self.densityPerSqKm
 
+'''
+CSVState class will load data from state code csv file
+'''
+class CSVState:
+
+    def __init__(self):
+        self.srNo      = 'SrNo'
+        self.state     = 'State'
+        self.name      = 'Name'
+        self.tin       = 'TIN'
+        self.stateCode = 'StateCode'
+
+    def __repr__(self):
+        return self.srNo +','+ self.state +','+ self.name +','+ self.tin +','+ self.stateCode
+        
 
 '''
 ValidateFile(ABC) is a abstract base class which have all abstract methods and these methods are used 
