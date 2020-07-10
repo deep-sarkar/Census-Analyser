@@ -1,6 +1,7 @@
 import pandas as pd
 from custom_exceptions import FileIsNotCSVTypeException, EmptyFileException
 from abc import ABC, abstractmethod
+# import numpy as np
 
 class StateCensusAnalyser:
 
@@ -18,7 +19,10 @@ class ValidateFile(ABC):
     @abstractmethod
     def check_file_format(self, file_name):
         pass
-
+    
+    @abstractmethod
+    def check_delimiter(self, data_frame):
+        pass
             
 class CSVStateCensus(StateCensusAnalyser, ValidateFile):
 
@@ -35,7 +39,7 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
             return df
         except pd.errors.EmptyDataError:
             raise EmptyFileException
-        
+
     def iterate_df(self, dataframe):
         for row in dataframe.itertuples():
             print(row)
@@ -46,11 +50,21 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     def check_file_format(self, file_name):
         return file_name[-4:] != '.csv'
 
+    
 
 file_name = "IndiaStateCensusData.csv"
+invalid_header_file = "csv_with_invalid_header.csv"
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
-print(df)
+
+# if df.isnull().values.any():
+#     print("yes")
+# for index in df.index:
+#     print(df['DensityPerSqKm'][index])
+#     if df['DensityPerSqKm'][index] == None:
+#         print("Invalid")
+# print(df)
+# print(df._engine.data.dialect.delimiter)
 # total_records = obj.number_of_records(df)
 # print(total_records)
 # print(len(df))
