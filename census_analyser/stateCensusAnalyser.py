@@ -50,6 +50,8 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     def check_file_format(self, file_name):
         return file_name[-4:] != '.csv'
 
+    def check_delimiter(self, data_frame):
+        return data_frame.isnull().values.any()
     
 
 file_name = "IndiaStateCensusData.csv"
