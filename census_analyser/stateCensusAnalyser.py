@@ -23,18 +23,8 @@ class StateCensusAnalyser:
 '''
 ValidateFile(ABC) is a abstract base class which have all abstract methods and these methods are used 
 to validate csv file.
-'''
-class ValidateFile(ABC):
-    
-    @abstractmethod
-    def check_file_format(self, file_name):  #abstract method to check file format is .csv or not
-        pass
-    
-    @abstractmethod
-    def check_delimiter(self, data_frame): #abstract method to check delimiter is correct or not
-        pass
-            
-class CSVStateCensus(StateCensusAnalyser, ValidateFile): 
+'''           
+class CSVStateCensus(StateCensusAnalyser): 
 
     def __init__(self, file_name):
         self.file_name = file_name
@@ -42,11 +32,11 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     
     @property
     def load_CSV(self):
-        if self.check_file_format(self.file_name):
+        if self.file_name[-4:] != '.csv':
             raise FileIsNotCSVTypeException
         try:
             df = pd.read_csv(self.file_name, usecols=self.col_list)
-            if self.check_delimiter(df):
+            if df.isnull().values.any():
                 raise InvalidDelimiterException
             return df
         except pd.errors.EmptyDataError:
@@ -61,20 +51,27 @@ class CSVStateCensus(StateCensusAnalyser, ValidateFile):
     def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
 
-    def check_file_format(self, file_name): #overrided method to check file format will returns True if its not .csv
-        return file_name[-4:] != '.csv'
 
-    def check_delimiter(self, data_frame): #if there is nan in file or empty data will return True
-        return data_frame.isnull().values.any()
+
+
+
+
+
+
+    # def check_file_format(self, file_name): #overrided method to check file format will returns True if its not .csv
+    #     return file_name[-4:] != '.csv'
+
+    # def check_delimiter(self, data_frame): #if there is nan in file or empty data will return True
+    #     return data_frame.isnull().values.any()
     
 
-file_name = "IndiaStateCensusData.csv"
-invalid_header_file = "csv_with_invalid_header.csv"
-invalid_delimiter_file = "csv_with_invalid_delimiter.csv"
-demo_empty_csv = "demo_empty.csv"
-demo_txt    = "demo_empty.txt"
-obj = CSVStateCensus(invalid_header_file)
-df = obj.load_CSV
+# file_name = "IndiaStateCensusData.csv"
+# invalid_header_file = "csv_with_invalid_header.csv"
+# invalid_delimiter_file = "csv_with_invalid_delimiter.csv"
+# demo_empty_csv = "demo_empty.csv"
+# demo_txt    = "demo_empty.txt"
+# obj = CSVStateCensus(invalid_header_file)
+# df = obj.load_CSV
 
 # if df.isnull().values.any():
 #     print("yes")
