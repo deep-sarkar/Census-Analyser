@@ -1,6 +1,8 @@
 import pytest
 from stateCensusAnalyser import CSVStateCensus
-from custom_exceptions import FileIsNotCSVTypeException,EmptyFileException,InvalidDelimiterException
+from custom_exceptions import ( FileIsNotCSVTypeException, 
+                                EmptyFileException, 
+                                InvalidDelimiterException)
 
 class TestCensus:
 
