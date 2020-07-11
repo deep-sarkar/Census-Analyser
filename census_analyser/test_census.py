@@ -70,3 +70,8 @@ class TestCensus:
         with pytest.raises(KeyDoesNotMatchedException):
             obj = CSVStateCensus("StateCode.csv")
             obj.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
+
+    def test_after_sort_according_to_population_check_first_record_will_be_Sikkim_UC5(self):
+        obj = CSVStateCensus("IndiaStateCensusData.csv")
+        data = obj.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
+        assert data[0]["State"] == "Sikkim"
