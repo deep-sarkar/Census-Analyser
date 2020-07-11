@@ -29,3 +29,8 @@ class TestCensus:
     def test_file_is_csv_but_header_is_invalid_will_return_InvalidHeader_UC1_TC5(self):
         obj = CSVStateCensus("csv_with_invalid_header.csv")
         assert obj.load_CSV == "InvalidHeader"
+
+    def test_State_code_records_to_match_number_of_records_UC2_TC1(self):
+        obj = CSVStateCensus("StateCode.csv")
+        total_records = obj.number_of_records(obj.load_CSV)
+        assert total_records == 36
