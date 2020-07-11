@@ -2,7 +2,8 @@ import pytest
 from stateCensusAnalyser import CSVStateCensus
 from custom_exceptions import ( FileIsNotCSVTypeException, 
                                 EmptyFileException, 
-                                InvalidDelimiterException)
+                                InvalidDelimiterException,
+                                KeyDoesNotMatchedException)
 
 class TestCensus:
 
@@ -54,3 +55,9 @@ class TestCensus:
         obj = CSVStateCensus("StateCode.csv")
         data_frame = obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
         assert data_frame.pop()["StateCode"] == 'WB'
+
+    def test_StateCode_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC4(self):
+        with pytest.raises(KeyDoesNotMatchedException):
+            obj = CSVStateCensus("IndiaStateCensusData.csv")
+            data_frame = obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
+            data_frame["StateCode"]
