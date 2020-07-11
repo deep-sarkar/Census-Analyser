@@ -72,6 +72,13 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
     def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
 
+
+
+'''
+SortData class will have all method according to all sorting method and save data into json
+'''
+class SortData:
+
     def sort_InidaCensusData_in_alphabetical_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
         try:
             sorted_df = dataframe.sort_values(['State'])
@@ -102,6 +109,11 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
         except KeyError:
             raise KeyDoesNotMatchedException
 
+
+
+
+
+
 file_name = "IndiaStateCensusData.csv"
 # invalid_header_file = "csv_with_invalid_header.csv"
 # invalid_delimiter_file = "csv_with_invalid_delimiter.csv"
@@ -110,7 +122,8 @@ file_name = "IndiaStateCensusData.csv"
 code_csv = 'StateCode.csv'
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
-s = obj.sort_InidaCensusData_in_asc_population_order_in_JSON(df)
+sort_ref = SortData()
+s = sort_ref.sort_InidaCensusData_in_asc_population_order_in_JSON(df)
 print(s)
 # print(sorted_df)
 # print(df)
