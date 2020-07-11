@@ -82,7 +82,7 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
         except KeyError:
             raise KeyDoesNotMatchedException
     
-    def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
+    def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCode data according to Code
         try:
             sorted_df = dataframe.sort_values(['StateCode'])
             sorted_df.to_json(r'StateCode.json', orient='records')
