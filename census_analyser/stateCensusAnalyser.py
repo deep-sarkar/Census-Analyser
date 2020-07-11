@@ -92,6 +92,15 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
         except KeyError:
             raise KeyDoesNotMatchedException
     
+    def sort_InidaCensusData_in_asc_population_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
+        try:
+            sorted_df = dataframe.sort_values(['DensityPerSqKm'])
+            sorted_df.to_json(r'IndiStateCensusData_asc_population.json', orient='records')
+            with open('IndiStateCensusData_asc_population.json','r') as json_file:
+                census = json.load(json_file)
+                return census
+        except KeyError:
+            raise KeyDoesNotMatchedException
 
 file_name = "IndiaStateCensusData.csv"
 # invalid_header_file = "csv_with_invalid_header.csv"
@@ -99,9 +108,9 @@ file_name = "IndiaStateCensusData.csv"
 # demo_empty_csv = "demo_empty.csv"
 # demo_txt    = "demo_empty.txt"
 code_csv = 'StateCode.csv'
-obj = CSVStateCensus(code_csv)
+obj = CSVStateCensus(file_name)
 df = obj.load_CSV
-s = obj.sort_StateCode_in_stateCode_order_in_JSON(df)
+s = obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(df)
 print(s)
 # print(sorted_df)
 # print(df)
