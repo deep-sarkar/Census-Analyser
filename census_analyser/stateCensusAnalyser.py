@@ -71,10 +71,17 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
     def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
 
-    def sort_InidaCensusData_in_alphabetical_order_in_JSON(self, dataframe):
+    def sort_InidaCensusData_in_alphabetical_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
         sorted_df = dataframe.sort_values(['State'])
         sorted_df.to_json(r'IndiStateCensusData.json', orient='records')
         with open('IndiStateCensusData.json','r') as json_file:
+            census = json.load(json_file)
+            return census
+    
+    def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
+        sorted_df = dataframe.sort_values(['StateCode'])
+        sorted_df.to_json(r'StateCode.json', orient='records')
+        with open('StateCode.json','r') as json_file:
             census = json.load(json_file)
             return census
     
@@ -85,9 +92,9 @@ file_name = "IndiaStateCensusData.csv"
 # demo_empty_csv = "demo_empty.csv"
 # demo_txt    = "demo_empty.txt"
 code_csv = 'StateCode.csv'
-obj = CSVStateCensus(file_name)
+obj = CSVStateCensus(code_csv)
 df = obj.load_CSV
-s = obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(df)
+s = obj.sort_StateCode_in_stateCode_order_in_JSON(df)
 print(s)
 # print(sorted_df)
 # print(df)
