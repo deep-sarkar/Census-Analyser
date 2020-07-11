@@ -10,3 +10,5 @@ class InvalidDelimiterException(BaseException):
 class EmptyFileException(BaseException):
     pass
 
+class KeyDoesNotMatchedException(BaseException):
+    pass
