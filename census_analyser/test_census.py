@@ -49,3 +49,8 @@ class TestCensus:
         obj = CSVStateCensus("StateCode.csv")
         data_frame = obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
         assert data_frame[0]["StateCode"] == 'AD'
+
+    def test_StateCode_last_stateCode_after_sorting_in_JSON_will_be_WB_UC4(self):
+        obj = CSVStateCensus("StateCode.csv")
+        data_frame = obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
+        assert data_frame.pop()["StateCode"] == 'WB'
