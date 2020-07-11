@@ -65,8 +65,9 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
             return "InvalidHeader"
 
     def iterate_df(self, dataframe):        #Iterate dataframe into touples
-        for row in dataframe.itertuples():
-            print(row)
+        df_list = [list(row) for row in dataframe.values]
+        for record in df_list:
+            print(record)
         
     def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
@@ -83,7 +84,8 @@ file_name = "IndiaStateCensusData.csv"
 code_csv = 'StateCode.csv'
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
-print(df)
+# print(df)
+obj.iterate_df(df)
 
 # if df.isnull().values.any():
 #     print("yes")
