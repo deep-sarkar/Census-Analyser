@@ -75,3 +75,8 @@ class TestCensus:
         obj = CSVStateCensus("IndiaStateCensusData.csv")
         data = obj.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
         assert data[0]["State"] == "Sikkim"
+
+    def test_after_sort_according_to_population_check_last_record_will_be_Uttar_Pradesh_UC5(self):
+        obj = CSVStateCensus("IndiaStateCensusData.csv")
+        data = obj.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
+        assert data.pop()["State"] == "Uttar Pradesh"
