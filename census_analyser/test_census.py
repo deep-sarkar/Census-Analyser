@@ -83,3 +83,8 @@ class TestCensus:
         obj = CSVStateCensus("IndiaStateCensusData.csv")
         data = sort_ref.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
         assert data.pop()["State"] == "Uttar Pradesh"
+
+    def test_after_sort_according_to_populationDensity_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC5(self):
+        with pytest.raises(KeyDoesNotMatchedException):
+            obj = CSVStateCensus("StateCode.csv")
+            sort_ref.sort_InidaCensusData_in_asc_population_density_order_in_JSON(obj.load_CSV)
