@@ -27,7 +27,7 @@ class CSVState:
 
     def __init__(self):
         self.srNo      = 'SrNo'
-        self.stateName     = 'StateName'
+        self.stateName = 'StateName'
         self.tin       = 'TIN'
         self.stateCode = 'StateCode'
 
@@ -35,8 +35,7 @@ class CSVState:
         return self.srNo +','+ self.stateName +','+ self.tin +','+ self.stateCode
 
 '''
-ValidateFile(ABC) is a abstract base class which have all abstract methods and these methods are used 
-to validate csv file.
+CSVStateCensus class will inherit StateCensusAnalyser and CSVState to load data from csv file.
 '''           
 class CSVStateCensus(StateCensusAnalyser, CSVState): 
 
