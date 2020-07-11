@@ -94,7 +94,7 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
     
     def sort_InidaCensusData_in_asc_population_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
         try:
-            sorted_df = dataframe.sort_values(['DensityPerSqKm'])
+            sorted_df = dataframe.sort_values(['Population'])
             sorted_df.to_json(r'IndiStateCensusData_asc_population.json', orient='records')
             with open('IndiStateCensusData_asc_population.json','r') as json_file:
                 census = json.load(json_file)
@@ -110,7 +110,7 @@ file_name = "IndiaStateCensusData.csv"
 code_csv = 'StateCode.csv'
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
-s = obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(df)
+s = obj.sort_InidaCensusData_in_asc_population_order_in_JSON(df)
 print(s)
 # print(sorted_df)
 # print(df)
