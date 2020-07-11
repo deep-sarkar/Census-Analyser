@@ -73,11 +73,14 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
         return len(dataframe) - 1
 
     def sort_InidaCensusData_in_alphabetical_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
-        sorted_df = dataframe.sort_values(['State'])
-        sorted_df.to_json(r'IndiStateCensusData.json', orient='records')
-        with open('IndiStateCensusData.json','r') as json_file:
-            census = json.load(json_file)
-            return census
+        try:
+            sorted_df = dataframe.sort_values(['State'])
+            sorted_df.to_json(r'IndiStateCensusData.json', orient='records')
+            with open('IndiStateCensusData.json','r') as json_file:
+                census = json.load(json_file)
+                return census
+        except KeyError:
+            raise KeyDoesNotMatchedException
     
     def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
         try:
