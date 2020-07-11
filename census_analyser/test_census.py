@@ -46,6 +46,11 @@ class TestCensus:
         data_frame = obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(obj.load_CSV)
         assert data_frame[28]["State"] == 'West Bengal'
 
+    def test_IndiaCensusData_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC3(self):
+        with pytest.raises(KeyDoesNotMatchedException):
+            obj = CSVStateCensus("StateCode.csv")
+            obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(obj.load_CSV)
+
     def test_StateCode_first_stateCode_after_sorting_in_JSON_will_be_AD_UC4(self):
         obj = CSVStateCensus("StateCode.csv")
         data_frame = obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
@@ -59,5 +64,5 @@ class TestCensus:
     def test_StateCode_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC4(self):
         with pytest.raises(KeyDoesNotMatchedException):
             obj = CSVStateCensus("IndiaStateCensusData.csv")
-            data_frame = obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
-            data_frame["StateCode"]
+            obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
+            
