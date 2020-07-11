@@ -3,7 +3,7 @@ from custom_exceptions import (FileIsNotCSVTypeException,
                                EmptyFileException, 
                                InvalidDelimiterException)
 from abc import ABC, abstractmethod
-# import numpy as np
+import json
 
 '''
 StatusCensusAnalyser class will load StateCensus data
@@ -71,8 +71,12 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
     def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
 
-
-
+    def sort_InidaCensusData_in_alphabetical_order_in_JSON(self, dataframe):
+        sorted_df = dataframe.sort_values(['State'])
+        sorted_df.to_json(r'IndiStateCensusData.json', orient='records')
+        with open('IndiStateCensusData.json','r') as json_file:
+            census = json.load(json_file)
+            return census
     
 
 file_name = "IndiaStateCensusData.csv"
@@ -83,9 +87,12 @@ file_name = "IndiaStateCensusData.csv"
 code_csv = 'StateCode.csv'
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
+s = obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(df)
+print(s)
+# print(sorted_df)
 # print(df)
-df_list = obj.iterate_df(df)
-print(df_list)
+# df_list = obj.iterate_df(df)
+# print(df_list)
 
 # if df.isnull().values.any():
 #     print("yes")
