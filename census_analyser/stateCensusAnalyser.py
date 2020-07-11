@@ -66,8 +66,7 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
 
     def iterate_df(self, dataframe):        #Iterate dataframe into touples
         df_list = [list(row) for row in dataframe.values]
-        for record in df_list:
-            print(record)
+        return df_list
         
     def number_of_records(self, dataframe): #Return Number of rows in csv or records
         return len(dataframe) - 1
@@ -85,7 +84,8 @@ code_csv = 'StateCode.csv'
 obj = CSVStateCensus(file_name)
 df = obj.load_CSV
 # print(df)
-obj.iterate_df(df)
+df_list = obj.iterate_df(df)
+print(df_list)
 
 # if df.isnull().values.any():
 #     print("yes")
