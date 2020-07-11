@@ -1,7 +1,8 @@
 import pandas as pd
 from custom_exceptions import (FileIsNotCSVTypeException, 
                                EmptyFileException, 
-                               InvalidDelimiterException)
+                               InvalidDelimiterException,
+                               KeyDoesNotMatchedException)
 from abc import ABC, abstractmethod
 import json
 
@@ -79,11 +80,14 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
             return census
     
     def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
-        sorted_df = dataframe.sort_values(['StateCode'])
-        sorted_df.to_json(r'StateCode.json', orient='records')
-        with open('StateCode.json','r') as json_file:
-            census = json.load(json_file)
-            return census
+        try:
+            sorted_df = dataframe.sort_values(['StateCode'])
+            sorted_df.to_json(r'StateCode.json', orient='records')
+            with open('StateCode.json','r') as json_file:
+                census = json.load(json_file)
+                return census
+        except KeyError:
+            raise KeyDoesNotMatchedException
     
 
 file_name = "IndiaStateCensusData.csv"
