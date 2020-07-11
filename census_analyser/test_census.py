@@ -65,4 +65,8 @@ class TestCensus:
         with pytest.raises(KeyDoesNotMatchedException):
             obj = CSVStateCensus("IndiaStateCensusData.csv")
             obj.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
-            
+    
+    def test_after_sort_according_to_population_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC5(self):
+        with pytest.raises(KeyDoesNotMatchedException):
+            obj = CSVStateCensus("StateCode.csv")
+            obj.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
