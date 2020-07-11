@@ -34,3 +34,8 @@ class TestCensus:
         obj = CSVStateCensus("StateCode.csv")
         total_records = obj.number_of_records(obj.load_CSV)
         assert total_records == 36
+    
+    def test_IndiaStateCensus_first_state_after_sorting_in_JSON_will_be_Andhra_Pradesh_UC3(self):
+        obj = CSVStateCensus("IndiaStateCensusData.csv")
+        data_frame = obj.sort_InidaCensusData_in_alphabetical_order_in_JSON(obj.load_CSV)
+        assert data_frame[0]["State"] == 'Andhra Pradesh'
