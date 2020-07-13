@@ -74,3 +74,7 @@ class TestCensus:
     def test_mapping_by_checking_first_record_will_be_AP_REFACTOR6(self):
         data = map_ref._Mapping__map_state_census_with_state_code_according_to_code()
         assert data[0]["StateCode"] == 'AP'
+
+    def test_mapping_by_checking_last_record_will_be_WB_REFACTOR6(self):
+        data = map_ref._Mapping__map_state_census_with_state_code_according_to_code()
+        assert data.pop()["StateCode"] == 'WB'
