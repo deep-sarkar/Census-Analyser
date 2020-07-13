@@ -55,20 +55,14 @@ class TestCensus:
         data_frame = sort_ref._SortData__sort_StateCode_in_stateCode_order_in_JSON()
         assert data_frame.pop()["StateCode"] == 'WB'
 
-    # def test_after_sort_according_to_population_check_first_record_will_be_Sikkim_UC5(self):
-    #     obj = CSVStateCensus("IndiaStateCensusData.csv")
-    #     data = sort_ref.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
-    #     assert data[0]["State"] == "Sikkim"
+    def test_after_sort_according_to_population_check_first_record_will_be_Sikkim_UC5(self):
+        data = sort_ref._SortData__sort_InidaCensusData_in_asc_population_order_in_JSON()
+        assert data[0]["State"] == "Sikkim"
 
-    # def test_after_sort_according_to_population_check_last_record_will_be_Uttar_Pradesh_UC5(self):
-    #     obj = CSVStateCensus("IndiaStateCensusData.csv")
-    #     data = sort_ref.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
-    #     assert data.pop()["State"] == "Uttar Pradesh"
+    def test_after_sort_according_to_population_check_last_record_will_be_Uttar_Pradesh_UC5(self):
+        data = sort_ref._SortData__sort_InidaCensusData_in_asc_population_order_in_JSON()
+        assert data.pop()["State"] == "Uttar Pradesh"
 
-    # def test_after_sort_according_to_populationDensity_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC6(self):
-    #     with pytest.raises(KeyDoesNotMatchedException):
-    #         obj = CSVStateCensus("StateCode.csv")
-    #         sort_ref.sort_InidaCensusData_in_asc_population_density_order_in_JSON(obj.load_CSV)
 
     # def test_after_sort_according_to_populationDensity_check_first_record_will_be_Arunachal_Pradesh_UC6(self):
     #     obj = CSVStateCensus("IndiaStateCensusData.csv")
