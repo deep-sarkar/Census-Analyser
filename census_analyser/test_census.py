@@ -78,3 +78,7 @@ class TestCensus:
     def test_mapping_by_checking_last_record_will_be_WB_REFACTOR6(self):
         data = map_ref._Mapping__map_state_census_with_state_code_according_to_code()
         assert data.pop()["StateCode"] == 'WB'
+
+    def test_first_state_from_census_data_after_sorting_in_desc_area_order_will_return_Rajasthan(self):
+        data = sort_ref._SortData__sort_InidaCensusData_in_desc_area_order_in_JSON()
+        assert data[0]["State"] == "Rajasthan"
