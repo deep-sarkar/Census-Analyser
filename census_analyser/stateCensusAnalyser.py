@@ -1,8 +1,7 @@
 import pandas as pd
 from custom_exceptions import (FileIsNotCSVTypeException, 
                                EmptyFileException, 
-                               InvalidDelimiterException,
-                               KeyDoesNotMatchedException)
+                               InvalidDelimiterException)
 from abc import ABC, abstractmethod
 import json
 
@@ -87,24 +86,18 @@ class SortData(CSVStateCensus):
 
 
     def __sort_InidaCensusData_in_alphabetical_order_in_JSON(self): #sort and returns stateCensus data according to state
-        try:
             sorted_df = self.__sorting_function(self.census_data_frame,"State")
             sorted_df.to_json(r'IndiStateCensusData.json', orient='records')
             with open('IndiStateCensusData.json','r') as json_file:
                 census = json.load(json_file)
                 return census
-        except KeyError:
-            raise KeyDoesNotMatchedException
     
-    # def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCode data according to Code
-    #     try:
-    #         sorted_df = dataframe.sort_values(['StateCode'])
-    #         sorted_df.to_json(r'StateCode.json', orient='records')
-    #         with open('StateCode.json','r') as json_file:
-    #             census = json.load(json_file)
-    #             return census
-    #     except KeyError:
-    #         raise KeyDoesNotMatchedException
+    def __sort_StateCode_in_stateCode_order_in_JSON(self): #sort and returns stateCode data according to Code
+            sorted_df = self.__sorting_function(self.code_data_frame,'StateCode')
+            sorted_df.to_json(r'StateCode.json', orient='records')
+            with open('StateCode.json','r') as json_file:
+                census = json.load(json_file)
+                return census
     
     # def sort_InidaCensusData_in_asc_population_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
     #     try:
