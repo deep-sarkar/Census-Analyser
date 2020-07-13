@@ -112,9 +112,22 @@ class SortData(CSVStateCensus):
             with open('IndiStateCensusData_asc_populationDensity.json','r') as json_file:
                 census = json.load(json_file)
                 return census
-        
 
 
+'''
+Mapping class inherits SortData class and map state census with state code. 
+'''
+class Mapping(SortData):
+
+    def __map_state_census_with_state_code_according_to_code(self):
+        merge_inner = pd.merge(left=self.code_data_frame, right=self.census_data_frame,left_on='StateName',right_on='State')
+        merged_data = merge_inner.drop(['SrNo'], axis=1)
+        sort_state_code = merged_data.sort_values('StateCode')
+        sort_state_code.to_json(r'Mapped_data_acc_to_stateCode.json', orient='records')
+        with open('Mapped_data_acc_to_stateCode.json','r') as map_file:
+            map_data = json.load(map_file) 
+            return map_data
+       
 
 
 
@@ -153,9 +166,12 @@ class SortData(CSVStateCensus):
 # for ind in df.index:
 #     print(df['State'][ind])
 
-s = SortData()
-d = s._SortData__sort_InidaCensusData_in_asc_population_order_in_JSON()
-print(d)
+# s = SortData()
+# d = s._SortData__sort_InidaCensusData_in_asc_population_order_in_JSON()
+# for data in d:
+#     print(data['State'])
 
-
+m = Mapping()
+c = m._Mapping__map_state_census_with_state_code_according_to_code()
+print(c)
 
