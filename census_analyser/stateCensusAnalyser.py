@@ -76,11 +76,19 @@ class CSVStateCensus(StateCensusAnalyser, CSVState):
 '''
 SortData class will have all method according to all sorting method and save data into json
 '''
-class SortData:
+class SortData(CSVStateCensus):
+    def __init__(self):
+        self.code_data_frame = CSVStateCensus("StateCode.csv").load_CSV
+        self.census_data_frame = CSVStateCensus("IndiaStateCensusData.csv").load_CSV
 
-    def sort_InidaCensusData_in_alphabetical_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to state
+
+    def __sorting_function(self,dataframe,col_name):
+        return dataframe.sort_values([col_name])
+
+
+    def __sort_InidaCensusData_in_alphabetical_order_in_JSON(self): #sort and returns stateCensus data according to state
         try:
-            sorted_df = dataframe.sort_values(['State'])
+            sorted_df = self.__sorting_function(self.census_data_frame,"State")
             sorted_df.to_json(r'IndiStateCensusData.json', orient='records')
             with open('IndiStateCensusData.json','r') as json_file:
                 census = json.load(json_file)
@@ -88,52 +96,53 @@ class SortData:
         except KeyError:
             raise KeyDoesNotMatchedException
     
-    def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCode data according to Code
-        try:
-            sorted_df = dataframe.sort_values(['StateCode'])
-            sorted_df.to_json(r'StateCode.json', orient='records')
-            with open('StateCode.json','r') as json_file:
-                census = json.load(json_file)
-                return census
-        except KeyError:
-            raise KeyDoesNotMatchedException
+    # def sort_StateCode_in_stateCode_order_in_JSON(self, dataframe): #sort and returns stateCode data according to Code
+    #     try:
+    #         sorted_df = dataframe.sort_values(['StateCode'])
+    #         sorted_df.to_json(r'StateCode.json', orient='records')
+    #         with open('StateCode.json','r') as json_file:
+    #             census = json.load(json_file)
+    #             return census
+    #     except KeyError:
+    #         raise KeyDoesNotMatchedException
     
-    def sort_InidaCensusData_in_asc_population_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
-        try:
-            sorted_df = dataframe.sort_values(['Population'])
-            sorted_df.to_json(r'IndiStateCensusData_asc_population.json', orient='records')
-            with open('IndiStateCensusData_asc_population.json','r') as json_file:
-                census = json.load(json_file)
-                return census
-        except KeyError:
-            raise KeyDoesNotMatchedException
+    # def sort_InidaCensusData_in_asc_population_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
+    #     try:
+    #         sorted_df = dataframe.sort_values(['Population'])
+    #         sorted_df.to_json(r'IndiStateCensusData_asc_population.json', orient='records')
+    #         with open('IndiStateCensusData_asc_population.json','r') as json_file:
+    #             census = json.load(json_file)
+    #             return census
+    #     except KeyError:
+    #         raise KeyDoesNotMatchedException
 
-    def sort_InidaCensusData_in_asc_population_density_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
-        try:
-            sorted_df = dataframe.sort_values(['DensityPerSqKm'])
-            sorted_df.to_json(r'IndiStateCensusData_asc_populationDensity.json', orient='records')
-            with open('IndiStateCensusData_asc_populationDensity.json','r') as json_file:
-                census = json.load(json_file)
-                return census
-        except KeyError:
-            raise KeyDoesNotMatchedException
-
-
+    # def sort_InidaCensusData_in_asc_population_density_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
+    #     try:
+    #         sorted_df = dataframe.sort_values(['DensityPerSqKm'])
+    #         sorted_df.to_json(r'IndiStateCensusData_asc_populationDensity.json', orient='records')
+    #         with open('IndiStateCensusData_asc_populationDensity.json','r') as json_file:
+    #             census = json.load(json_file)
+    #             return census
+    #     except KeyError:
+    #         raise KeyDoesNotMatchedException
 
 
 
 
-file_name = "IndiaStateCensusData.csv"
+
+
+# file_name = "IndiaStateCensusData.csv"
 # invalid_header_file = "csv_with_invalid_header.csv"
 # invalid_delimiter_file = "csv_with_invalid_delimiter.csv"
 # demo_empty_csv = "demo_empty.csv"
 # demo_txt    = "demo_empty.txt"
-code_csv = 'StateCode.csv'
-obj = CSVStateCensus(file_name)
-df = obj.load_CSV
-sort_ref = SortData()
-s = sort_ref.sort_InidaCensusData_in_asc_population_density_order_in_JSON(df)
-print(s)
+# code_csv = 'StateCode.csv'
+# obj = CSVStateCensus(file_name)
+# df = obj.load_CSV
+# d = df.sort_values(['State'])
+# print(d)
+# s = sort_ref.sort_InidaCensusData_in_asc_population_density_order_in_JSON(df)
+# print(s)
 # print(sorted_df)
 # print(df)
 # df_list = obj.iterate_df(df)
@@ -154,13 +163,12 @@ print(s)
 # df_goa = df.loc[df["State"]=="Goa"]
 # print(df_goa)
 # print(df_goa['Population'])
-
-    
-  
 # for ind in df.index:
 #     print(df['State'][ind])
 
-    
+s = SortData()
+d = s._SortData__sort_InidaCensusData_in_alphabetical_order_in_JSON()
+print(d)
 
 
 
