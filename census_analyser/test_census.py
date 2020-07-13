@@ -1,11 +1,12 @@
 import pytest
-from stateCensusAnalyser import CSVStateCensus, SortData
+from stateCensusAnalyser import CSVStateCensus, SortData, Mapping
 from custom_exceptions import ( FileIsNotCSVTypeException, 
                                 EmptyFileException, 
                                 InvalidDelimiterException)
 
 
 sort_ref = SortData()
+map_ref  = Mapping()
 
 class TestCensus:
 
@@ -69,3 +70,7 @@ class TestCensus:
     def test_after_sort_according_to_populationDensity_check_last_record_will_be_Bihar_UC6(self):
         data = sort_ref._SortData__sort_InidaCensusData_in_asc_population_density_order_in_JSON()
         assert data.pop()["State"] == "Bihar"
+    
+    def test_mapping_by_checking_first_record_will_be_AP_REFACTOR6(self):
+        data = map_ref._Mapping__map_state_census_with_state_code_according_to_code()
+        assert data[0]["StateCode"] == 'AP'
