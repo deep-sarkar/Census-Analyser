@@ -47,25 +47,13 @@ class TestCensus:
         data_frame = sort_ref._SortData__sort_InidaCensusData_in_alphabetical_order_in_JSON()
         assert data_frame[28]["State"] == 'West Bengal'
 
-    # def test_StateCode_first_stateCode_after_sorting_in_JSON_will_be_AD_UC4(self):
-    #     obj = CSVStateCensus("StateCode.csv")
-    #     data_frame = sort_ref.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
-    #     assert data_frame[0]["StateCode"] == 'AD'
+    def test_StateCode_first_stateCode_after_sorting_in_JSON_will_be_AD_UC4(self):
+        data_frame = sort_ref._SortData__sort_StateCode_in_stateCode_order_in_JSON()
+        assert data_frame[0]["StateCode"] == 'AD'
 
-    # def test_StateCode_last_stateCode_after_sorting_in_JSON_will_be_WB_UC4(self):
-    #     obj = CSVStateCensus("StateCode.csv")
-    #     data_frame = sort_ref.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
-    #     assert data_frame.pop()["StateCode"] == 'WB'
-
-    # def test_StateCode_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC4(self):
-    #     with pytest.raises(KeyDoesNotMatchedException):
-    #         obj = CSVStateCensus("IndiaStateCensusData.csv")
-    #         sort_ref.sort_StateCode_in_stateCode_order_in_JSON(obj.load_CSV)
-    
-    # def test_after_sort_according_to_population_if_key_does_not_present_will_raise_KeyDoesNotMatchedException_UC5(self):
-    #     with pytest.raises(KeyDoesNotMatchedException):
-    #         obj = CSVStateCensus("StateCode.csv")
-    #         sort_ref.sort_InidaCensusData_in_asc_population_order_in_JSON(obj.load_CSV)
+    def test_StateCode_last_stateCode_after_sorting_in_JSON_will_be_WB_UC4(self):
+        data_frame = sort_ref._SortData__sort_StateCode_in_stateCode_order_in_JSON()
+        assert data_frame.pop()["StateCode"] == 'WB'
 
     # def test_after_sort_according_to_population_check_first_record_will_be_Sikkim_UC5(self):
     #     obj = CSVStateCensus("IndiaStateCensusData.csv")
