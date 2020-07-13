@@ -82,3 +82,7 @@ class TestCensus:
     def test_first_state_from_census_data_after_sorting_in_desc_area_order_will_return_Rajasthan(self):
         data = sort_ref._SortData__sort_InidaCensusData_in_desc_area_order_in_JSON()
         assert data[0]["State"] == "Rajasthan"
+
+    def test_last_state_from_census_data_after_sorting_in_desc_area_order_will_return_Goa(self):
+        data = sort_ref._SortData__sort_InidaCensusData_in_desc_area_order_in_JSON()
+        assert data.pop()["State"] == "Goa"
