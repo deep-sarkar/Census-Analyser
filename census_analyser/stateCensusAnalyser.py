@@ -106,16 +106,13 @@ class SortData(CSVStateCensus):
                 census = json.load(json_file)
                 return census
 
-    # def sort_InidaCensusData_in_asc_population_density_order_in_JSON(self, dataframe): #sort and returns stateCensus data according to population
-    #     try:
-    #         sorted_df = dataframe.sort_values(['DensityPerSqKm'])
-    #         sorted_df.to_json(r'IndiStateCensusData_asc_populationDensity.json', orient='records')
-    #         with open('IndiStateCensusData_asc_populationDensity.json','r') as json_file:
-    #             census = json.load(json_file)
-    #             return census
-    #     except KeyError:
-    #         raise KeyDoesNotMatchedException
-
+    def __sort_InidaCensusData_in_asc_population_density_order_in_JSON(self): #sort and returns stateCensus data according to population
+            sorted_df = self.__sorting_function(self.census_data_frame,"DensityPerSqKm")
+            sorted_df.to_json(r'IndiStateCensusData_asc_populationDensity.json', orient='records')
+            with open('IndiStateCensusData_asc_populationDensity.json','r') as json_file:
+                census = json.load(json_file)
+                return census
+        
 
 
 
