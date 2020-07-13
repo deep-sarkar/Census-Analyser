@@ -2,8 +2,7 @@ import pytest
 from stateCensusAnalyser import CSVStateCensus, SortData
 from custom_exceptions import ( FileIsNotCSVTypeException, 
                                 EmptyFileException, 
-                                InvalidDelimiterException,
-                                KeyDoesNotMatchedException)
+                                InvalidDelimiterException)
 
 
 sort_ref = SortData()
