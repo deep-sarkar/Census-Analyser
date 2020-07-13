@@ -63,9 +63,7 @@ class TestCensus:
         data = sort_ref._SortData__sort_InidaCensusData_in_asc_population_order_in_JSON()
         assert data.pop()["State"] == "Uttar Pradesh"
 
-
     def test_after_sort_according_to_populationDensity_check_first_record_will_be_Arunachal_Pradesh_UC6(self):
-        
         data = sort_ref._SortData__sort_InidaCensusData_in_asc_population_density_order_in_JSON()
         assert data[0]["State"] == "Arunachal Pradesh"
 
