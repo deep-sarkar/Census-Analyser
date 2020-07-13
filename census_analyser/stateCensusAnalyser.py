@@ -81,8 +81,8 @@ class SortData(CSVStateCensus):
         self.census_data_frame = CSVStateCensus("IndiaStateCensusData.csv").load_CSV
 
 
-    def __sorting_function(self,dataframe,col_name):
-        return dataframe.sort_values([col_name])
+    def __sorting_function(self,dataframe,col_name,ascending=True):  #Sorting functtion
+        return dataframe.sort_values([col_name],ascending=ascending)
 
 
     def __sort_InidaCensusData_in_alphabetical_order_in_JSON(self): #sort and returns stateCensus data according to state
@@ -106,12 +106,19 @@ class SortData(CSVStateCensus):
                 census = json.load(json_file)
                 return census
 
-    def __sort_InidaCensusData_in_asc_population_density_order_in_JSON(self): #sort and returns stateCensus data according to population
+    def __sort_InidaCensusData_in_asc_population_density_order_in_JSON(self): #sort and returns stateCensus data according to populationSensity
             sorted_df = self.__sorting_function(self.census_data_frame,"DensityPerSqKm")
             sorted_df.to_json(r'IndiStateCensusData_asc_populationDensity.json', orient='records')
             with open('IndiStateCensusData_asc_populationDensity.json','r') as json_file:
                 census = json.load(json_file)
                 return census
+
+    def __sort_InidaCensusData_in_desc_area_order_in_JSON(self): #sort and returns stateCensus data according to descending area Area
+        sorted_df = self.__sorting_function(self.census_data_frame,"AreaInSqKm",ascending=False)
+        sorted_df.to_json(r'IndiStateCensusData_desc_area.json', orient='records')
+        with open('IndiStateCensusData_desc_area.json','r') as json_file:
+            census = json.load(json_file)
+            return census
 
 
 '''
@@ -167,11 +174,12 @@ class Mapping(SortData):
 #     print(df['State'][ind])
 
 # s = SortData()
-# d = s._SortData__sort_InidaCensusData_in_asc_population_order_in_JSON()
+# d = s._SortData__sort_InidaCensusData_in_asc_population_density_order_in_JSON()
+# print(d)
 # for data in d:
 #     print(data['State'])
 
-m = Mapping()
-c = m._Mapping__map_state_census_with_state_code_according_to_code()
-print(c)
+# m = Mapping()
+# c = m._Mapping__map_state_census_with_state_code_according_to_code()
+# print(c)
 
